@@ -1,0 +1,25 @@
+// @import './styles/litera/bulmaswatch';
+
+@import "bulma/sass/utilities/initial-variables";
+@import "bulma/sass/utilities/functions";
+
+$primary: #45b2d3;
+// $link: $blue;
+// $info: #99649E;
+// $success: #41CDDF;
+// $warning: $yellow;
+// $danger: $red;
+// $dark: #181818;
+
+@import "bulma/sass/utilities/derived-variables";
+
+@import 'bulma/bulma';
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+}

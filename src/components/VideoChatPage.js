@@ -240,9 +240,13 @@ const ContainerStyle = styled.section`
 `
 
 const VideoAreaStyle = styled.div`
-    background-color: #F4F8F8;
+    position: relative;
+    /* background-color: #FBFCFC; */
+    background-image: url('/assets/img/background.png');
     height: 100%;
     width: 100%;    
+    display: flex;
+    flex-direction: column;
 `
 
 const VideoAreaHeaderStyle = styled.div`

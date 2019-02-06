@@ -4,7 +4,27 @@ import styled from 'styled-components';
 
 import Peer from 'skyway-js';
 
+import MessageList from 'components/common/MessageList';
+
 import * as routes from '../constants/routes';
+
+const DUMMY_DATA = [{
+    itsMe: true,
+    text: 'Hello, its me.'
+}, 
+{
+    itsMe: false,
+    text: 'Hello, Im Kenji'
+}];
+
+const INITIAL_STATE = {
+    peerId: '',
+    toPeerId: '',
+    videoEnabled: true,
+    audioEnabled: true,
+    inputMessage: '',
+    timelineMessages: DUMMY_DATA,
+};
 
 const peer = new Peer({
     key: process.env.REACT_APP_SKYWAY_API_KEY,
@@ -16,12 +36,7 @@ class VideoChatPage extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            peerId: '',
-            toPeerId: '',
-            videoEnabled: true,
-            audioEnabled: true,
-        };
+        this.state = { ...INITIAL_STATE };
 
         this._localStream = '';
         this._localRoom = '';
@@ -128,6 +143,28 @@ class VideoChatPage extends Component {
             console.log("Peer id " + peerId + " is left");
             document.getElementById("to-video").remove();
         });
+
+        room.on('data', message => {
+            console.log(message);
+            let result = this.state.timelineMessages;
+            if (message.data) {
+                let result = {
+                    itsMe: false,
+                    text: message.data,
+                };
+                this.setState({
+                    timelineMessages: [...this.state.timelineMessages, result],
+                });
+            }
+            // if (message.data instanceof ArrayBuffer) {
+            //   const dataView = new Uint8Array(message.data);
+            //   const dataBlob = new Blob([dataView]);
+            //   const url = URL.createObjectURL(dataBlob);
+            //   messages.append('<div><span class="file">' + message.src + ' has sent you a <a target="_blank" href="' + url + '">file</a>.</span></div>');
+            // } else {
+            //     messages.append('<div><span class="peer">' + message.src + '</span>: ' + message.data + '</div>');
+            // }
+        });
     }
 
     /**
@@ -167,11 +204,33 @@ class VideoChatPage extends Component {
         }
     }
 
+    onClickSend = (event, message) => {
+        event.preventDefault();
+        if (!message) return;
+
+        if (this._localStream && this._localRoom) {
+            console.log(message);
+            this._localRoom.send(message);
+            let result = {
+                itsMe: true,
+                text: message,
+            };
+            this.setState({
+                inputMessage: '',
+                timelineMessages: [...this.state.timelineMessages, result],
+            });
+        }
+    }
+
     render() {
         const {
             peerId,
             toPeerId,
+            inputMessage,
+            timelineMessages,
         } = this.state;
+
+        const isDisable = inputMessage ? false : true;
 
         return (
             <React.Fragment>
@@ -197,19 +256,13 @@ class VideoChatPage extends Component {
                                     To Peer ID: { toPeerId }
                                 </OpponentVideoHeaderStyle>
                                 <OpponentVideoViewStyle>
-                                    {/* <video id="to-video"></video> */}
-                                    <img src='/assets/img/webinar-3199164_1920.jpg' alt='no video' />
+                                    <video id="to-video"></video>
+                                    {/* <img id="to-video" src='/assets/img/webinar-3199164_1920.jpg' alt='no video' /> */}
                                 </OpponentVideoViewStyle>
                                 <VideoControlAreaStyle>
-                                    <div>
-                                        <button className="button" onClick={ event => this.onClickLeave(event) }>Leave from Room</button>
-                                    </div>
-                                    <div>
-                                        <button onClick={ event => this.toggleVideoEnabled(event) }>Video ON/Off</button>
-                                    </div>
-                                    <div>
-                                        <button onClick={ event => this.toggleAudioEnabled(event) }>Audio ON/Off</button>
-                                    </div>
+                                    <i className='uil uil-video' onClick={ event => this.toggleVideoEnabled(event) }></i>
+                                    <i className='uil uil-microphone' onClick={ event => this.toggleAudioEnabled(event) }></i>
+                                    <i className='uil uil-exit' onClick={ event => this.onClickLeave(event) }></i>
                                 </VideoControlAreaStyle>
                             </OpponentVideoAreaStyle>
                         </VideoContentStyle>
@@ -217,11 +270,27 @@ class VideoChatPage extends Component {
 
                     <ChatAreaStyle>
                         <ChatTimelineStyle>
-                            Chat Timeline
+                            <ChatTimelineHeader>
+                                Chat Timeline
+                            </ChatTimelineHeader>
+                            <ChatTimelineContent>
+                                <MessageList messages={timelineMessages} />
+                            </ChatTimelineContent>
                         </ChatTimelineStyle>
                         <ChatInputAreaStyle>
-                            <input></input>
-                            <button>Send</button>
+                            <input
+                                className="input" 
+                                type="text" 
+                                placeholder="Message"
+                                value={inputMessage}
+                                onChange={e => this.setState({ inputMessage: e.target.value })}
+                            />
+                            <button 
+                                className="button"
+                                disabled={isDisable}
+                                onClick={ event => this.onClickSend(event, inputMessage) }>
+                                Send
+                            </button>
                         </ChatInputAreaStyle>
                     </ChatAreaStyle>
                 </ContainerStyle>
@@ -231,6 +300,7 @@ class VideoChatPage extends Component {
 }
 
 const ContainerStyle = styled.section`
+    position: relative;
     height: 100%;
     padding: 0;
     margin: 0;
@@ -256,8 +326,6 @@ const VideoAreaHeaderStyle = styled.div`
 
 const VideoContentStyle = styled.div`
     position: relative;
-    height: auto;
-    min-height: 100%;
     display: flex;
     flex-direction: row;
 `
@@ -304,7 +372,6 @@ const OpponentVideoHeaderStyle = styled.div`
 
 const OpponentVideoViewStyle = styled.div`
     width: 100%;
-    height: 70%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -322,17 +389,33 @@ const OpponentVideoViewStyle = styled.div`
 `
 
 const VideoControlAreaStyle = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 150px;
+    &>i {
+        padding: 5px;
+        margin: 5px;
+        border-radius: 50%;
+        /* background-color: grey; */
+        font-size: 25px;
+    }
 `
 
 const ChatAreaStyle = styled.div`
-    background-color: #E3EDEF;
+    background-color: #FBFCFC;
     height: 100%;
-    min-width: 300px;
+    width: 25%;
+    min-width: 200px;
     margin-left: auto;
 `
 
 const ChatTimelineStyle = styled.div``
+
+const ChatTimelineHeader = styled.div``
+
+const ChatTimelineContent = styled.div``
+
 
 const ChatInputAreaStyle = styled.div``
 

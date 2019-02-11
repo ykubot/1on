@@ -8,14 +8,88 @@ import MessageList from 'components/common/MessageList';
 
 import * as routes from '../constants/routes';
 
-const DUMMY_DATA = [{
-    itsMe: true,
-    text: 'Hello, its me.'
-}, 
-{
-    itsMe: false,
-    text: 'Hello, Im Kenji'
-}];
+const DUMMY_DATA = [
+    {
+        itsMe: false,
+        text: 'Hello, its me.'
+    }, 
+    {
+        itsMe: true,
+        text: 'Hello, Im Kenji'
+    },
+    {
+        itsMe: false,
+        text: 'Hello, its me.'
+    }, 
+    {
+        itsMe: true,
+        text: 'Hello, Im Kenji'
+    },
+    {
+        itsMe: false,
+        text: 'Hello, its me.'
+    }, 
+    {
+        itsMe: true,
+        text: 'Hello, Im Kenji'
+    },
+    {
+        itsMe: false,
+        text: 'Hello, its me.'
+    }, 
+    {
+        itsMe: true,
+        text: 'Hello, Im Kenji'
+    },
+    {
+        itsMe: false,
+        text: 'Hello, its me.'
+    }, 
+    {
+        itsMe: true,
+        text: 'Hello, Im Kenji'
+    },
+    {
+        itsMe: false,
+        text: 'Hello, its me.'
+    }, 
+    {
+        itsMe: true,
+        text: 'Hello, Im Kenji'
+    },
+    {
+        itsMe: false,
+        text: 'Hello, its me.'
+    }, 
+    {
+        itsMe: true,
+        text: 'Hello, Im Kenji'
+    },
+    {
+        itsMe: false,
+        text: 'Hello, its me.'
+    }, 
+    {
+        itsMe: true,
+        text: 'Hello, Im Kenji'
+    },
+    {
+        itsMe: false,
+        text: 'Hello, its me.'
+    }, 
+    {
+        itsMe: true,
+        text: 'Hello, Im Kenji'
+    },
+    {
+        itsMe: false,
+        text: 'Hello, its me.'
+    }, 
+    {
+        itsMe: true,
+        text: 'Hello, Im Kenji'
+    },
+];
 
 const INITIAL_STATE = {
     peerId: '',
@@ -285,12 +359,11 @@ class VideoChatPage extends Component {
                                 value={inputMessage}
                                 onChange={e => this.setState({ inputMessage: e.target.value })}
                             />
-                            <button 
-                                className="button"
+                            <i 
+                                className='uil uil-message'
                                 disabled={isDisable}
-                                onClick={ event => this.onClickSend(event, inputMessage) }>
-                                Send
-                            </button>
+                                onClick={ event => this.onClickSend(event, inputMessage) }
+                            ></i>
                         </ChatInputAreaStyle>
                     </ChatAreaStyle>
                 </ContainerStyle>
@@ -408,16 +481,41 @@ const ChatAreaStyle = styled.div`
     width: 25%;
     min-width: 200px;
     margin-left: auto;
+    display: flex;
+    flex-direction: column;
 `
 
-const ChatTimelineStyle = styled.div``
+const ChatTimelineStyle = styled.div`
+    height: calc(100vh - 108px);
+    display: flex;
+    flex-direction: column;
+`
 
-const ChatTimelineHeader = styled.div``
+const ChatTimelineHeader = styled.div`
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: .5px solid #4a4a4a;
+`
 
-const ChatTimelineContent = styled.div``
+const ChatTimelineContent = styled.div`
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+`
 
-
-const ChatInputAreaStyle = styled.div``
+const ChatInputAreaStyle = styled.div`
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    padding: 10px 5px;
+    &>i {
+        width: 30px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+`
 
 
 export default VideoChatPage;

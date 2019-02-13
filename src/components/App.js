@@ -8,6 +8,7 @@ import VideoChatPage from 'components/VideoChatPage';
 // Layout Component
 import Navigation from 'components/common/Navigation';
 import Hero from 'components/common/Hero';
+import Footer from 'components/common/Footer';
 
 // Constants
 import * as routes from '../constants/routes';
@@ -28,10 +29,10 @@ class App extends Component {
 							<Route exact path={routes.LP} component={() => <Hero />}/>
 							<Route exact path={routes.VIDEO_CHAT_ROOM_ID} component={(props) => <VideoChatPage {...props} />}/>
 						</Switch>
-						<footer class="hero-footer">
-							<a class="" href="#">button one</a>
-							<a class="" href="#">button two</a>
-						</footer>
+						<Switch>
+							<Route exact path={routes.LP} component={() => <Footer />}/>
+						</Switch>
+						
 					</HeroSectionStyle>
 				</React.Fragment>
 			</Router>

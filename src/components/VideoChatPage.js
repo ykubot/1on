@@ -11,84 +11,13 @@ import * as routes from '../constants/routes';
 const DUMMY_DATA = [
     {
         itsMe: false,
-        text: 'Hello, its me.'
+        text: 'Hello, its me.its me.its me.its me.its me.its me.'
     }, 
     {
         itsMe: true,
-        text: 'Hello, Im Kenji'
+        text: 'Hello, Im KenjiIm KenjiIm KenjiIm KenjiIm KenjiIm KenjiIm Kenji'
     },
-    {
-        itsMe: false,
-        text: 'Hello, its me.'
-    }, 
-    {
-        itsMe: true,
-        text: 'Hello, Im Kenji'
-    },
-    {
-        itsMe: false,
-        text: 'Hello, its me.'
-    }, 
-    {
-        itsMe: true,
-        text: 'Hello, Im Kenji'
-    },
-    {
-        itsMe: false,
-        text: 'Hello, its me.'
-    }, 
-    {
-        itsMe: true,
-        text: 'Hello, Im Kenji'
-    },
-    {
-        itsMe: false,
-        text: 'Hello, its me.'
-    }, 
-    {
-        itsMe: true,
-        text: 'Hello, Im Kenji'
-    },
-    {
-        itsMe: false,
-        text: 'Hello, its me.'
-    }, 
-    {
-        itsMe: true,
-        text: 'Hello, Im Kenji'
-    },
-    {
-        itsMe: false,
-        text: 'Hello, its me.'
-    }, 
-    {
-        itsMe: true,
-        text: 'Hello, Im Kenji'
-    },
-    {
-        itsMe: false,
-        text: 'Hello, its me.'
-    }, 
-    {
-        itsMe: true,
-        text: 'Hello, Im Kenji'
-    },
-    {
-        itsMe: false,
-        text: 'Hello, its me.'
-    }, 
-    {
-        itsMe: true,
-        text: 'Hello, Im Kenji'
-    },
-    {
-        itsMe: false,
-        text: 'Hello, its me.'
-    }, 
-    {
-        itsMe: true,
-        text: 'Hello, Im Kenji'
-    },
+    
 ];
 
 const INITIAL_STATE = {
@@ -311,27 +240,22 @@ class VideoChatPage extends Component {
                 <ContainerStyle>
                     <VideoAreaStyle>
                         <VideoAreaHeaderStyle>
-                            <div>
-                                Room ID: { this._roomId }
-                            </div>
+                            <CopyLinkStyle>
+                                <span>{ window.location.href }</span>
+                                <Link to={routes.VIDEO_CHAT + '/' + this._roomId} className="button is-primary is-rounded">Copy</Link>
+                            </CopyLinkStyle>
                         </VideoAreaHeaderStyle>
 
                         <VideoContentStyle>
                             <MyVideoAreaStyle>
-                                <MyVideoHeaderStyle>
-                                    My Peer ID: { peerId }
-                                </MyVideoHeaderStyle>
                                 <MyVideoViewStyle>
                                     <video id="my-video"></video>
                                 </MyVideoViewStyle>
                             </MyVideoAreaStyle>
                             <OpponentVideoAreaStyle>
-                                <OpponentVideoHeaderStyle>
-                                    To Peer ID: { toPeerId }
-                                </OpponentVideoHeaderStyle>
                                 <OpponentVideoViewStyle>
-                                    <video id="to-video"></video>
-                                    {/* <img id="to-video" src='/assets/img/webinar-3199164_1920.jpg' alt='no video' /> */}
+                                    {/* <video id="to-video"></video> */}
+                                    <img id="to-video" src='/assets/img/webinar-3199164_1920.jpg' alt='no video' />
                                 </OpponentVideoViewStyle>
                                 <VideoControlAreaStyle>
                                     <i className='uil uil-video' onClick={ event => this.toggleVideoEnabled(event) }></i>
@@ -344,9 +268,6 @@ class VideoChatPage extends Component {
 
                     <ChatAreaStyle>
                         <ChatTimelineStyle>
-                            <ChatTimelineHeader>
-                                Chat Timeline
-                            </ChatTimelineHeader>
                             <ChatTimelineContent>
                                 <MessageList messages={timelineMessages} />
                             </ChatTimelineContent>
@@ -379,26 +300,48 @@ const ContainerStyle = styled.section`
     margin: 0;
     display: flex;
     flex-direction: row;
-    align-items: center;
 `
 
 const VideoAreaStyle = styled.div`
-    position: relative;
+    /* position: relative; */
     /* background-color: #FBFCFC; */
-    background-image: url('/assets/img/background.png');
-    height: 100%;
+    /* background-image: url('/assets/img/background.png'); */
+    /* height: 100%; */
     width: 100%;    
     display: flex;
     flex-direction: column;
 `
 
 const VideoAreaHeaderStyle = styled.div`
+    padding: 10px 20px;
     width: 100%;
     height: 50px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+	display: flex;
+    
+`
+
+const CopyLinkStyle = styled.div`
+    display: -webkit-box;
+    display: -ms-flexbox;
+	display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    color: #787979;
+    &>span {
+        margin: 5px;
+    }
+    &>a {
+        margin: 10px;
+    }
 `
 
 const VideoContentStyle = styled.div`
+    height: 100%;
     position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     flex-direction: row;
 `
@@ -410,8 +353,6 @@ const MyVideoAreaStyle = styled.div`
     padding: 10px;
 `
 
-const MyVideoHeaderStyle = styled.div`
-`
 
 const MyVideoViewStyle = styled.div`
     width: 100%;
@@ -423,11 +364,13 @@ const MyVideoViewStyle = styled.div`
         width: 100%;
         height: 100%;
         object-fit: cover;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
     &>img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
 `
 
@@ -437,10 +380,6 @@ const OpponentVideoAreaStyle = styled.div`
     width: 100%;
     align-items: center;
     padding: 10px;
-`
-
-const OpponentVideoHeaderStyle = styled.div`
-    width: 100%;
 `
 
 const OpponentVideoViewStyle = styled.div`
@@ -453,11 +392,13 @@ const OpponentVideoViewStyle = styled.div`
         width: 100%;
         height: 100%;
         object-fit: cover;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
     &>img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
 `
 
@@ -476,11 +417,12 @@ const VideoControlAreaStyle = styled.div`
 `
 
 const ChatAreaStyle = styled.div`
-    background-color: #FBFCFC;
+    background-color: #FFFFFF;
     height: 100%;
     width: 25%;
     min-width: 200px;
     margin-left: auto;
+    padding-right: 10px;
     display: flex;
     flex-direction: column;
 `
@@ -489,14 +431,6 @@ const ChatTimelineStyle = styled.div`
     height: calc(100vh - 108px);
     display: flex;
     flex-direction: column;
-`
-
-const ChatTimelineHeader = styled.div`
-    height: 35px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-bottom: .5px solid #4a4a4a;
 `
 
 const ChatTimelineContent = styled.div`

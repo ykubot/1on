@@ -10,7 +10,7 @@ class MessageList extends Component {
                         return (
                             <MessageListLiStyle key={message.id}>
                                 <MessageMeBoxStyle>
-                                    {message.itsMe ? 'Me: ' : ''}
+                                    {message.text}
                                 </MessageMeBoxStyle>
                             </MessageListLiStyle>
                         )
@@ -29,6 +29,7 @@ class MessageList extends Component {
 }
 
 const MessageListUlStyle = styled.ul`
+    padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,7 +41,8 @@ const MessageListLiStyle = styled.li`
 `
 
 const MessageMeBoxStyle = styled.div`
-    background-color: #8E76B6; 
+    background-color: #45b2d3;
+    color: #FFFFFF;
     margin-left: 1em;
     padding: 5px 10px;
     border-radius: 15px;
@@ -49,8 +51,8 @@ const MessageMeBoxStyle = styled.div`
 const MessageBoxStyle = styled.div`
     background-color: #FFFFFF; 
     margin-right: 1em;
-    padding: 5px;
-    border: .5px solid #323940;
+    padding: 5px 10px;
+    border: .5px solid #EEEEEE;
     border-radius: 15px;
 `
 

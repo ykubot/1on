@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 
 import * as routes from 'constants/routes';
 
+import Footer from 'components/common/Footer';
+
 const INITIAL_STATE = {
     roomId: '',
 };
@@ -62,8 +64,7 @@ class Hero extends Component {
                     <HeroRightContentStyle>
                         <img src='/assets/img/sample-image.png' alt='Sample' />
                     </HeroRightContentStyle>
-                </HeroContainerStyle>                    
-
+                </HeroContainerStyle>
             </React.Fragment>
         );
     }

@@ -22,12 +22,16 @@ class App extends Component {
 		return (
 			<Router>
 				<React.Fragment>
-					<HeroSectionStyle className="hero is-large">
+					<HeroSectionStyle>
 						<Navigation />
 						<Switch>
 							<Route exact path={routes.LP} component={() => <Hero />}/>
 							<Route exact path={routes.VIDEO_CHAT_ROOM_ID} component={(props) => <VideoChatPage {...props} />}/>
 						</Switch>
+						<footer class="hero-footer">
+							<a class="" href="#">button one</a>
+							<a class="" href="#">button two</a>
+						</footer>
 					</HeroSectionStyle>
 				</React.Fragment>
 			</Router>
@@ -36,8 +40,17 @@ class App extends Component {
 }
 
 const HeroSectionStyle = styled.section`
-	height: 100vh;
-	background-color: #FFFFFF;
+	width: 100vw;
+	height: auto;
+	min-height: 100vh;
+	background-color: #FBFCFC;
+	display: -webkit-box;
+    display: -ms-flexbox;
+	display: flex;
+	flex-direction: column;
+    -webkit-box-pack: space-between;
+    -ms-flex-pack: space-between;
+    justify-content: space-between;
 	/* background-image: url("/assets/img/hero.png");
 	background-position: center -100px;
     background-repeat: no-repeat;

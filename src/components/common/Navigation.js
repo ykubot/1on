@@ -6,12 +6,16 @@ import * as routes from 'constants/routes';
 
 const Navigation = () => 
     <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
+        <HeaderStyle class="navbar-brand">
             <Link className="navbar-item" to={routes.LP}>
-				1on
+                <img src='/assets/img/logo/icon-logo.png' alt='Icon Logo' />
 			</Link>
-        </div>
+        </HeaderStyle>
     </nav>;
 
+const HeaderStyle = styled.div`
+    display: flex;
+    align-items: center;
+`
 
 export default Navigation;

@@ -11,8 +11,10 @@ const Footer = () =>
 
 const FooterStyle = styled.footer`
     /* background-color: #181818; */
+    position: fixed;
+    width: 100%;
+    bottom: 0;
     padding: 1rem 1.5rem 1rem;
 `
-
 
 export default Footer;

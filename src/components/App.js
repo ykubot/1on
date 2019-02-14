@@ -24,7 +24,9 @@ class App extends Component {
 			<Router>
 				<React.Fragment>
 					<HeroSectionStyle>
-						<Navigation />
+						<Switch>
+							<Route exact path={routes.VIDEO_CHAT_ROOM_ID} component={() => <Navigation />}/>
+						</Switch>
 						<Switch>
 							<Route exact path={routes.LP} component={() => <Hero />}/>
 							<Route exact path={routes.VIDEO_CHAT_ROOM_ID} component={(props) => <VideoChatPage {...props} />}/>
@@ -44,14 +46,15 @@ const HeroSectionStyle = styled.section`
 	width: 100vw;
 	height: auto;
 	min-height: 100vh;
+	padding-bottom: 50px;
 	background-color: #FBFCFC;
 	display: -webkit-box;
     display: -ms-flexbox;
 	display: flex;
 	flex-direction: column;
-    -webkit-box-pack: space-between;
-    -ms-flex-pack: space-between;
-    justify-content: space-between;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
 	/* background-image: url("/assets/img/hero.png");
 	background-position: center -100px;
     background-repeat: no-repeat;

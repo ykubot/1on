@@ -139,6 +139,7 @@ class VideoChatPage extends Component {
       
         room.on('close', () => {
             console.log('Room Close');
+            if(!document.getElementById("to-video")) return;
             document.getElementById("to-video").remove()
         });
 
@@ -229,6 +230,8 @@ class VideoChatPage extends Component {
         const {
             peerId,
             toPeerId,
+            videoEnabled,
+            audioEnabled,
             inputMessage,
             timelineMessages,
         } = this.state;
@@ -254,13 +257,16 @@ class VideoChatPage extends Component {
                             </MyVideoAreaStyle>
                             <OpponentVideoAreaStyle>
                                 <OpponentVideoViewStyle>
-                                    {/* <video id="to-video"></video> */}
-                                    <img id="to-video" src='/assets/img/webinar-3199164_1920.jpg' alt='no video' />
+                                    {
+                                        toPeerId 
+                                        ? <video id="to-video"></video>
+                                        : <img id="to-video" src='/assets/img/webinar-3199164_1920.jpg' alt='no video' />
+                                    }
                                 </OpponentVideoViewStyle>
                                 <VideoControlAreaStyle>
-                                    <i className='uil uil-video' onClick={ event => this.toggleVideoEnabled(event) }></i>
-                                    <i className='uil uil-microphone' onClick={ event => this.toggleAudioEnabled(event) }></i>
-                                    <i className='uil uil-exit' onClick={ event => this.onClickLeave(event) }></i>
+                                    <ControlIcon className={ videoEnabled ? 'uil uil-video' : 'uil uil-video-slash'} enabled={videoEnabled} onClick={ event => this.toggleVideoEnabled(event) }></ControlIcon>
+                                    <ControlIcon className={ audioEnabled ? 'uil uil-microphone' : 'uil uil-microphone-slash'} enabled={audioEnabled} onClick={ event => this.toggleAudioEnabled(event) }></ControlIcon>
+                                    <ControlIcon className='uil uil-exit' enabled={toPeerId ? true : false} onClick={ event => this.onClickLeave(event) }></ControlIcon>
                                 </VideoControlAreaStyle>
                             </OpponentVideoAreaStyle>
                         </VideoContentStyle>
@@ -343,6 +349,7 @@ const VideoContentStyle = styled.div`
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    justify-content: flex-end;
     flex-direction: row;
 `
 
@@ -383,7 +390,9 @@ const OpponentVideoAreaStyle = styled.div`
 `
 
 const OpponentVideoViewStyle = styled.div`
-    width: 100%;
+    /* width: 100%; */
+    min-width: 700px;
+    max-height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -406,14 +415,19 @@ const VideoControlAreaStyle = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 150px;
+    width: 200px;
+    border-radius: 290486px;
+    background: rgba(50, 57, 64, 0.75);
     &>i {
         padding: 5px;
         margin: 5px;
         border-radius: 50%;
-        /* background-color: grey; */
         font-size: 25px;
     }
+`
+
+const ControlIcon = styled.i`
+    color: ${props => props.enabled ? '#45b2d3' : '#4a4a4a'};
 `
 
 const ChatAreaStyle = styled.div`

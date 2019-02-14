@@ -46,7 +46,6 @@ const HeroSectionStyle = styled.section`
 	width: 100vw;
 	height: auto;
 	min-height: 100vh;
-	padding-bottom: 50px;
 	background-color: #FBFCFC;
 	display: -webkit-box;
     display: -ms-flexbox;

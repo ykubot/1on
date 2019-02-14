@@ -14,6 +14,7 @@ const FooterStyle = styled.footer`
     position: fixed;
     width: 100%;
     bottom: 0;
+    margin-top: 40px;
     padding: 1rem 1.5rem 1rem;
 `
 

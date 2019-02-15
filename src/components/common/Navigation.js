@@ -16,6 +16,7 @@ const Navigation = () =>
 
 const NavStyle = styled.nav`
     background-color: #FBFCFC;
+    border-bottom: 1px solid #EDEEEF;
 `
 
 const HeaderStyle = styled.div`

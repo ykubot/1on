@@ -38,7 +38,7 @@ class Hero extends Component {
 
         return(
             <React.Fragment>
-                <HeroContainerStyle>
+                <HeroContainerStyle className="container">
                     <HeroLeftContentStyle>
                         <HeroLogoStyle>
                             <img src='/assets/img/logo/icon-logo.png' alt='Icon Logo' />
@@ -125,7 +125,6 @@ const HeroDescriptionStyle = styled.div`
 `
 
 const HeroRightContentStyle = styled.div`
-    min-width: 400px;
     max-width: 500px;
     padding: 20px;
 `

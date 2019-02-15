@@ -10,12 +10,12 @@ import * as routes from '../constants/routes';
 
 const DUMMY_DATA = [
     {
-        itsMe: false,
-        text: 'Hello, its me.its me.its me.its me.its me.its me.'
+        itsMe: true,
+        text: 'Hello, its me.'
     }, 
     {
-        itsMe: true,
-        text: 'Hello, Im KenjiIm KenjiIm KenjiIm KenjiIm KenjiIm KenjiIm Kenji'
+        itsMe: false,
+        text: 'Hello, Im Kenji.'
     },
     
 ];
@@ -325,7 +325,7 @@ const VideoAreaHeaderStyle = styled.div`
     display: -webkit-box;
     display: -ms-flexbox;
 	display: flex;
-    
+    border-bottom: 1px solid #EDEEEF;
 `
 
 const CopyLinkStyle = styled.div`
@@ -351,15 +351,16 @@ const VideoContentStyle = styled.div`
     display: flex;
     justify-content: flex-end;
     flex-direction: row;
+    align-items: flex-start;
 `
 
 const MyVideoAreaStyle = styled.div`
     display: flex;
     flex-direction: column;
     width: 30%;
+    min-width: 300px;
     padding: 10px;
 `
-
 
 const MyVideoViewStyle = styled.div`
     width: 100%;
@@ -390,22 +391,20 @@ const OpponentVideoAreaStyle = styled.div`
 `
 
 const OpponentVideoViewStyle = styled.div`
-    /* width: 100%; */
-    min-width: 700px;
-    max-height: 80vh;
+    position: relative;
+    min-width: 600px;
+    max-height: 70vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
     padding: 10px 0;
     &>video {
-        width: 100%;
-        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
         object-fit: cover;
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
     &>img {
-        width: 100%;
-        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
         object-fit: cover;
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
@@ -418,11 +417,13 @@ const VideoControlAreaStyle = styled.div`
     width: 200px;
     border-radius: 290486px;
     background: rgba(50, 57, 64, 0.75);
+    z-index: 1001;
     &>i {
         padding: 5px;
         margin: 5px;
         border-radius: 50%;
         font-size: 25px;
+        cursor: pointer;
     }
 `
 
@@ -436,9 +437,9 @@ const ChatAreaStyle = styled.div`
     width: 25%;
     min-width: 200px;
     margin-left: auto;
-    padding-right: 10px;
     display: flex;
     flex-direction: column;
+    border-left: 1px solid #EDEEEF;
 `
 
 const ChatTimelineStyle = styled.div`
@@ -457,7 +458,7 @@ const ChatInputAreaStyle = styled.div`
     margin-top: auto;
     display: flex;
     align-items: center;
-    padding: 10px 5px;
+    padding: 10px 10px 10px 5px;
     &>i {
         width: 30px;
         font-size: 20px;

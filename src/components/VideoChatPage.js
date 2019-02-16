@@ -10,14 +10,17 @@ import * as routes from '../constants/routes';
 
 const DUMMY_DATA = [
     {
-        itsMe: true,
-        text: 'Hello, its me.'
+        itsMe: false,
+        text: 'Hi, Kenji. '
     }, 
     {
-        itsMe: false,
-        text: 'Hello, Im Kenji.'
+        itsMe: true,
+        text: 'Hi, Ray.'
     },
-    
+    {
+        itsMe: false,
+        text: 'How are you today?'
+    },
 ];
 
 const INITIAL_STATE = {

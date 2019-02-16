@@ -62,7 +62,7 @@ class Hero extends Component {
                         </HeroDescriptionStyle>
                     </HeroLeftContentStyle>
                     <HeroRightContentStyle>
-                        <img src='/assets/img/sample-image.png' alt='Sample' />
+                        <img src='/assets/img/sample-image2.png' alt='Sample' />
                     </HeroRightContentStyle>
                 </HeroContainerStyle>
             </React.Fragment>

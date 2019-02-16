@@ -47,6 +47,7 @@ class VideoChatPage extends Component {
         this._localStream = '';
         this._localRoom = '';
         this._roomId = this.props.match.params.roomId;
+        this._roomUrl = React.createRef();
 
         this.peerEventHandler();
     }
@@ -95,6 +96,17 @@ class VideoChatPage extends Component {
     closeRoom() {
         if(!this._localRoom) return;
         this._localRoom.close();
+    }
+
+    /**
+     * Copy to Clickboard
+     */
+    copyToClickboard = (event) => {
+        event.preventDefault();
+        if(!this._roomUrl) return;
+        console.log(this._roomUrl);
+        this._roomUrl.current.select();
+        document.execCommand("copy");
     }
 
     /**
@@ -247,8 +259,19 @@ class VideoChatPage extends Component {
                     <VideoAreaStyle>
                         <VideoAreaHeaderStyle>
                             <CopyLinkStyle>
-                                <span>{ window.location.href }</span>
-                                <Link to={routes.VIDEO_CHAT + '/' + this._roomId} className="button is-primary is-rounded">Copy</Link>
+                                <input
+                                    className="input"  
+                                    type='text' 
+                                    ref={ this._roomUrl } 
+                                    value={ window.location.href }
+                                    
+                                    >
+                                </input>
+                                <Link 
+                                    to={routes.VIDEO_CHAT + '/' + this._roomId} 
+                                    className="button is-primary is-rounded"
+                                    onClick={ event => this.copyToClickboard(event) }
+                                >Copy</Link>
                             </CopyLinkStyle>
                         </VideoAreaHeaderStyle>
 
@@ -324,7 +347,7 @@ const VideoAreaStyle = styled.div`
 const VideoAreaHeaderStyle = styled.div`
     padding: 10px 20px;
     width: 100%;
-    height: 50px;
+    height: 60px;
     display: -webkit-box;
     display: -ms-flexbox;
 	display: flex;
@@ -336,10 +359,15 @@ const CopyLinkStyle = styled.div`
     display: -ms-flexbox;
 	display: flex;
     align-items: center;
-    flex-wrap: wrap;
     color: #787979;
-    &>span {
+    &>input {
+        width: 260px;
         margin: 5px;
+        background-color: #FBFCFC;
+        border: none;
+        color: #787979;
+        box-shadow: none;
+        cursor: default;
     }
     &>a {
         margin: 10px;

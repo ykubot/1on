@@ -56,6 +56,7 @@ class VideoChatPage extends Component {
     async componentDidMount() {
         try {
             this.getUserMedia();
+            this.retryGetUserMedia();
         } catch(err) {
             console.log('Get User Media failed.');
             console.log(err);
@@ -78,6 +79,18 @@ class VideoChatPage extends Component {
         myVideo.play();
     }
 
+    retryGetUserMedia() {
+        if(this._localStream) return;
+        setTimeout(
+            function() {
+                console.log('retry');
+                this.getUserMedia();
+            }
+            .bind(this),
+            3000
+        );
+    }
+
     /**
      * Join Room
      */
@@ -97,6 +110,9 @@ class VideoChatPage extends Component {
     closeRoom() {
         if(!this._localRoom) return;
         this._localRoom.close();
+        this.setState({
+            toPeerId: '',
+        });
     }
 
     /**
@@ -128,6 +144,7 @@ class VideoChatPage extends Component {
             this.setState({
                 peerId: peer.id ? peer.id : '',
             });
+            console.log('Peer ID: ', peer.id);
         });
 
         peer.on('error', error => {
@@ -140,11 +157,13 @@ class VideoChatPage extends Component {
      * Event Handler about Room
      */
     roomEventHandler(room) {
-        console.log(room);
+        // console.log(room);
         if(!room) return;
 
         room.on('stream', stream => {
             console.log(stream);
+            if(!stream) return;
+            console.log('To Peer ID: ', stream.peerId);
             this.setState({
                 toPeerId: stream.peerId ? stream.peerId : '',
             });
@@ -169,6 +188,7 @@ class VideoChatPage extends Component {
 
         room.on('peerLeave', peerId => {
             console.log("Peer id " + peerId + " is left");
+            if(!document.getElementById("to-video")) return;
             document.getElementById("to-video").remove();
         });
 

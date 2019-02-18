@@ -26,6 +26,7 @@ const DUMMY_DATA = [
 const INITIAL_STATE = {
     peerId: '',
     toPeerId: '',
+    isCopied: false,
     videoEnabled: true,
     audioEnabled: true,
     inputMessage: '',
@@ -104,9 +105,17 @@ class VideoChatPage extends Component {
     copyToClickboard = (event) => {
         event.preventDefault();
         if(!this._roomUrl) return;
+        this.setState({ isCopied: true });
         console.log(this._roomUrl);
         this._roomUrl.current.select();
         document.execCommand("copy");
+        setTimeout(
+            function() {
+                this.setState({isCopied: false});
+            }
+            .bind(this),
+            2000
+        );
     }
 
     /**
@@ -245,6 +254,7 @@ class VideoChatPage extends Component {
         const {
             peerId,
             toPeerId,
+            isCopied,
             videoEnabled,
             audioEnabled,
             inputMessage,
@@ -271,7 +281,7 @@ class VideoChatPage extends Component {
                                     to={routes.VIDEO_CHAT + '/' + this._roomId} 
                                     className="button is-primary is-rounded"
                                     onClick={ event => this.copyToClickboard(event) }
-                                >Copy</Link>
+                                >{ isCopied ? 'Copied!': 'Copy' }</Link>
                             </CopyLinkStyle>
                         </VideoAreaHeaderStyle>
 
@@ -370,6 +380,7 @@ const CopyLinkStyle = styled.div`
         cursor: default;
     }
     &>a {
+        width: 80px;
         margin: 10px;
     }
 `

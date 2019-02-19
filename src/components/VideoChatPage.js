@@ -313,11 +313,7 @@ class VideoChatPage extends Component {
                             </MyVideoAreaStyle>
                             <OpponentVideoAreaStyle>
                                 <OpponentVideoViewStyle>
-                                    {
-                                        toPeerId 
-                                        ? <video id="to-video"></video>
-                                        : <img id="to-video" src='/assets/img/webinar-3199164_1920.jpg' alt='no video' />
-                                    }
+                                    <video id="to-video" poster='https://source.unsplash.com/random/800x600' alt={toPeerId} ></video>
                                 </OpponentVideoViewStyle>
                                 <VideoControlAreaStyle>
                                     <ControlIcon className={ videoEnabled ? 'uil uil-video' : 'uil uil-video-slash'} enabled={videoEnabled} onClick={ event => this.toggleVideoEnabled(event) }></ControlIcon>
@@ -459,6 +455,8 @@ const OpponentVideoViewStyle = styled.div`
     display: flex;
     padding: 10px 0;
     &>video {
+        width: 100%;
+        height: 100%;
         max-width: 100%;
         max-height: 100%;
         object-fit: cover;

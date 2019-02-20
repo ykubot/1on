@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import media from "styled-media-query";
 
 import Peer from 'skyway-js';
 
@@ -356,8 +357,14 @@ const ContainerStyle = styled.section`
     height: 100%;
     padding: 0;
     margin: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     flex-direction: row;
+
+    ${media.lessThan("small")`
+        flex-direction: column;
+    `}
 `
 
 const VideoAreaStyle = styled.div`
@@ -365,7 +372,9 @@ const VideoAreaStyle = styled.div`
     /* background-color: #FBFCFC; */
     /* background-image: url('/assets/img/background.png'); */
     /* height: 100%; */
-    width: 100%;    
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     flex-direction: column;
 `
@@ -394,11 +403,18 @@ const CopyLinkStyle = styled.div`
         color: #787979;
         box-shadow: none;
         cursor: default;
+
+        ${media.lessThan("small")`
+            width: 230px;
+            font-size: 12px;        
+        `}
     }
     &>a {
         width: 80px;
         margin: 10px;
     }
+
+    
 `
 
 const VideoContentStyle = styled.div`
@@ -410,18 +426,42 @@ const VideoContentStyle = styled.div`
     justify-content: flex-end;
     flex-direction: row;
     align-items: flex-start;
+
+    ${media.lessThan("large")`
+        flex-direction: column;
+    `}
 `
 
 const MyVideoAreaStyle = styled.div`
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     flex-direction: column;
     width: 30%;
     min-width: 300px;
     padding: 10px;
+
+    ${media.between("small", "large")`
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        z-index: 1001;
+    `}
+
+    ${media.lessThan("small")`
+        position: absolute;
+        min-width: 150px;
+        padding: 0;
+        top: 0px;
+        left: 0px;
+        z-index: 1001;
+    `}
 `
 
 const MyVideoViewStyle = styled.div`
     width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -441,6 +481,8 @@ const MyVideoViewStyle = styled.div`
 `
 
 const OpponentVideoAreaStyle = styled.div`
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -452,6 +494,8 @@ const OpponentVideoViewStyle = styled.div`
     position: relative;
     min-width: 600px;
     max-height: 70vh;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     padding: 10px 0;
     &>video {
@@ -468,9 +512,17 @@ const OpponentVideoViewStyle = styled.div`
         object-fit: cover;
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
+
+    ${media.lessThan("small")`
+        width: 100%;
+        min-width: none;
+        max-height: none;
+    `}
 `
 
 const VideoControlAreaStyle = styled.div`
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -485,6 +537,11 @@ const VideoControlAreaStyle = styled.div`
         font-size: 25px;
         cursor: pointer;
     }
+
+    ${media.lessThan("small")`
+        position: absolute;
+        bottom: 0;
+    `}
 `
 
 const ControlIcon = styled.i`
@@ -497,13 +554,21 @@ const ChatAreaStyle = styled.div`
     width: 25%;
     min-width: 200px;
     margin-left: auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     flex-direction: column;
     border-left: 1px solid #EDEEEF;
+
+    ${media.lessThan("small")`
+        width: 100%;        
+    `}
 `
 
 const ChatTimelineStyle = styled.div`
     height: calc(100vh - 108px);
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     flex-direction: column;
 `
@@ -516,6 +581,8 @@ const ChatTimelineContent = styled.div`
 
 const ChatInputAreaStyle = styled.div`
     margin-top: auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     align-items: center;
     padding: 10px 10px 10px 5px;

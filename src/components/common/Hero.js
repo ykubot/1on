@@ -58,11 +58,11 @@ class Hero extends Component {
                             <Link to={routes.VIDEO_CHAT + '/' + roomId} className="button is-primary is-rounded">ビデオチャットを開始</Link>
                         </HeroLinkStyle>
                         <HeroDescriptionStyle>
-                            <img src='/assets/img/hero-description.png' alt='What is the 1on?' />
+                            <img src='/assets/img/hero-description.png' alt='1on' />
                         </HeroDescriptionStyle>
                     </HeroLeftContentStyle>
                     <HeroRightContentStyle>
-                        <img src='/assets/img/sample-image2.png' alt='Sample' />
+                        <img src='/assets/img/sample-image.png' alt='ビデオチャット' />
                     </HeroRightContentStyle>
                 </HeroContainerStyle>
             </React.Fragment>

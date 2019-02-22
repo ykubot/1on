@@ -13,6 +13,8 @@ import Footer from 'components/common/Footer';
 // Constants
 import * as routes from '../constants/routes';
 
+import GA from './GoogleAnalytics'
+
 class App extends Component {
 
 	componentDidMount() {
@@ -24,6 +26,7 @@ class App extends Component {
 			<Router>
 				<React.Fragment>
 					<HeroSectionStyle>
+						{ GA.init() && <GA.RouteTracker /> }
 						<Switch>
 							<Route exact path={routes.VIDEO_CHAT_ROOM_ID} component={() => <Navigation />}/>
 						</Switch>

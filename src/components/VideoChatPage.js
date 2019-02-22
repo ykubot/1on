@@ -396,7 +396,7 @@ const CopyLinkStyle = styled.div`
     align-items: center;
     color: #787979;
     &>input {
-        width: 260px;
+        width: 300px;
         margin: 5px;
         background-color: #FBFCFC;
         border: none;
@@ -443,16 +443,17 @@ const MyVideoAreaStyle = styled.div`
 
     ${media.between("small", "large")`
         position: absolute;
-        top: 20px;
-        left: 20px;
+        width: 20%;
+        min-width: 200px;
+        bottom: 20px;
         z-index: 1001;
     `}
 
     ${media.lessThan("small")`
         position: absolute;
-        min-width: 150px;
+        min-width: 120px;
         padding: 0;
-        top: 0px;
+        bottom: 20px;
         left: 0px;
         z-index: 1001;
     `}

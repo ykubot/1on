@@ -195,9 +195,10 @@ class VideoChatPage extends Component {
 
         room.on('data', message => {
             console.log(message);
-            let result = this.state.timelineMessages;
+            let currentMessages = this.state.timelineMessages;
             if (message.data) {
                 let result = {
+                    id: currentMessages.length + 1,
                     itsMe: false,
                     text: message.data,
                 };
@@ -260,7 +261,9 @@ class VideoChatPage extends Component {
         if (this._localStream && this._localRoom) {
             console.log(message);
             this._localRoom.send(message);
+            let currentMessages = this.state.timelineMessages;
             let result = {
+                id: currentMessages.length + 1,
                 itsMe: true,
                 text: message,
             };
@@ -268,6 +271,12 @@ class VideoChatPage extends Component {
                 inputMessage: '',
                 timelineMessages: [...this.state.timelineMessages, result],
             });
+        }
+    }
+
+    onKeyDown = (event, inputMessage) => {
+        if (event.keyCode === 13 && inputMessage) {
+            this.onClickSend(event, inputMessage);
         }
     }
 
@@ -338,6 +347,7 @@ class VideoChatPage extends Component {
                                 placeholder="Message"
                                 value={inputMessage}
                                 onChange={e => this.setState({ inputMessage: e.target.value })}
+                                onKeyDown={e => this.onKeyDown(e, inputMessage) }
                             />
                             <i 
                                 className='uil uil-message'

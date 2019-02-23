@@ -31,7 +31,7 @@ const INITIAL_STATE = {
     videoEnabled: true,
     audioEnabled: true,
     inputMessage: '',
-    timelineMessages: DUMMY_DATA,
+    timelineMessages: [],
 };
 
 const peer = new Peer({
@@ -364,6 +364,7 @@ const ContainerStyle = styled.section`
 
     ${media.lessThan("small")`
         flex-direction: column;
+        height: calc(100vh - 51px);
     `}
 `
 
@@ -561,7 +562,13 @@ const ChatAreaStyle = styled.div`
     border-left: 1px solid #EDEEEF;
 
     ${media.lessThan("small")`
-        width: 100%;        
+        width: 100%;
+        height: 35%;
+        position: fixed;
+        width: 100%;
+        height: 35%;
+        bottom: 0;
+        z-index: 1002;
     `}
 `
 
@@ -580,6 +587,7 @@ const ChatTimelineContent = styled.div`
 `
 
 const ChatInputAreaStyle = styled.div`
+    height: 130px;
     margin-top: auto;
     display: -webkit-box;
     display: -ms-flexbox;

@@ -597,7 +597,6 @@ const ChatTimelineContent = styled.div`
 `
 
 const ChatInputAreaStyle = styled.div`
-    height: 130px;
     margin-top: auto;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -609,6 +608,10 @@ const ChatInputAreaStyle = styled.div`
         font-size: 20px;
         cursor: pointer;
     }
+
+    ${media.lessThan("small")`
+        height: 130px;
+    `}
 `
 
 

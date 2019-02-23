@@ -451,7 +451,7 @@ const MyVideoAreaStyle = styled.div`
 
     ${media.lessThan("small")`
         position: absolute;
-        min-width: 120px;
+        min-width: 80px;
         padding: 0;
         bottom: 20px;
         left: 0px;
@@ -489,6 +489,10 @@ const OpponentVideoAreaStyle = styled.div`
     width: 100%;
     align-items: center;
     padding: 10px;
+
+    ${media.lessThan("small")`
+        padding: 0;
+    `}
 `
 
 const OpponentVideoViewStyle = styled.div`
@@ -507,17 +511,12 @@ const OpponentVideoViewStyle = styled.div`
         object-fit: cover;
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
-    &>img {
-        max-width: 100%;
-        max-height: 100%;
-        object-fit: cover;
-        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    }
 
     ${media.lessThan("small")`
         width: 100%;
-        min-width: none;
-        max-height: none;
+        min-width: 0;
+        max-width: 100%;
+        max-height: 100%;
     `}
 `
 

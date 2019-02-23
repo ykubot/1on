@@ -49,7 +49,6 @@ class VideoChatPage extends Component {
         this._localStream = '';
         this._localRoom = '';
         this._roomId = this.props.match.params.roomId;
-        this._roomUrl = React.createRef();
 
         this.peerEventHandler();
     }
@@ -121,11 +120,14 @@ class VideoChatPage extends Component {
      */
     copyToClickboard = (event) => {
         event.preventDefault();
-        if(!this._roomUrl) return;
         this.setState({ isCopied: true });
-        console.log(this._roomUrl);
-        this._roomUrl.current.select();
+
+        var copytext = document.getElementById('room-id');
+        var range = document.createRange();
+        range.selectNode(copytext);
+        window.getSelection().addRange(range);
         document.execCommand("copy");
+
         setTimeout(
             function() {
                 this.setState({isCopied: false});
@@ -300,11 +302,10 @@ class VideoChatPage extends Component {
                         <VideoAreaHeaderStyle>
                             <CopyLinkStyle>
                                 <input
+                                    id="room-id"
                                     className="input"  
                                     type='text' 
-                                    ref={ this._roomUrl } 
                                     value={ window.location.href }
-                                    
                                     >
                                 </input>
                                 <Link 
@@ -388,6 +389,7 @@ const VideoAreaStyle = styled.div`
     display: -ms-flexbox;
     display: flex;
     flex-direction: column;
+    z-index: 1000;
 `
 
 const VideoAreaHeaderStyle = styled.div`
@@ -578,7 +580,7 @@ const ChatAreaStyle = styled.div`
         width: 100%;
         height: 35%;
         bottom: 0;
-        z-index: 1002;
+        z-index: 999;
     `}
 `
 

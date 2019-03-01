@@ -515,14 +515,18 @@ const OpponentVideoViewStyle = styled.div`
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    justify-content: center;
     padding: 10px 0;
     &>video {
-        width: 100%;
         height: 100%;
         max-width: 100%;
         max-height: 100%;
         object-fit: cover;
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+
+        ${media.lessThan("small")`
+            max-height: 300px;
+        `}
     }
 
     ${media.lessThan("small")`

@@ -45,7 +45,7 @@ class Hero extends Component {
                             <img src='/assets/img/logo/icon-logo.png' alt='Icon Logo' />
                         </HeroLogoStyle>
                         <H1Style>
-                            登録不要の1on1ビデオチャットサービス
+                            <span>登録不要の1on1</span><span>ビデオチャットサービス</span>
                         </H1Style>
                         <HeroLinkStyle>
                             <span>{ window.location.href }</span>
@@ -60,6 +60,7 @@ class Hero extends Component {
                         </HeroLinkStyle>
                         <HeroDescriptionStyle>
                             <img src='/assets/img/hero-description.png' alt='1on' />
+                            <h4>※iOSは非対応</h4>
                         </HeroDescriptionStyle>
                     </HeroLeftContentStyle>
                     <HeroRightContentStyle>
@@ -99,6 +100,15 @@ const H1Style = styled.h1`
     padding: 5px 0;
     font-size: 28px;
     color: #323940;
+
+    ${media.lessThan("small")`
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    `}
 `
 
 const HeroLinkStyle = styled.div`
@@ -118,11 +128,21 @@ const HeroLinkStyle = styled.div`
     &>a {
         margin: 10px;
     }
+
+    ${media.lessThan("small")`
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        justify-content: center;
+    `}
 `
 
 const HeroDescriptionStyle = styled.div`
     max-width: 400px;
     margin: 50px 0;
+    &>h4 {
+        margin: 20px 0;
+    }
 `
 
 const HeroRightContentStyle = styled.div`

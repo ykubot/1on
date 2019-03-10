@@ -426,8 +426,6 @@ const CopyLinkStyle = styled.div`
         width: 80px;
         margin: 10px;
     }
-
-    
 `
 
 const VideoContentStyle = styled.div`

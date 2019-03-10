@@ -73,6 +73,7 @@ class Hero extends Component {
 }
 
 const HeroContainerStyle = styled.div`
+    min-height: calc(100vh - 56px);
     display: -webkit-box;
     display: -ms-flexbox;
 	display: flex;

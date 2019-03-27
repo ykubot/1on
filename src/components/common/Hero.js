@@ -48,7 +48,7 @@ class Hero extends Component {
                             <span>登録不要の1on1</span><span>ビデオチャットサービス</span>
                         </H1Style>
                         <HeroLinkStyle>
-                            <span>{ window.location.href }</span>
+                            <span>{ window.location.href + 'vc/' }</span>
                             <input
                                 className="input" 
                                 type="text" 

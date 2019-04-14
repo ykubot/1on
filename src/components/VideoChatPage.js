@@ -65,7 +65,17 @@ class VideoChatPage extends Component {
 
     async getUserMedia() {
 
-        let stream = await navigator.mediaDevices.getUserMedia({video: true, audio: true});
+        let stream = await navigator.mediaDevices.getUserMedia(
+            {
+                video: true, 
+                audio: {
+                    sampleRate: {ideal: 48000},
+                    channelCount: {ideal: 2, min: 1},
+                    echoCancellation : true,
+                    echoCancellationType : 'system',
+                    noiseSuppression : false
+                }
+            });
         console.log(stream);
         this._localStream = stream;
 
@@ -323,12 +333,12 @@ class VideoChatPage extends Component {
                         <VideoContentStyle>
                             <MyVideoAreaStyle>
                                 <MyVideoViewStyle>
-                                    <video id="my-video"></video>
+                                    <video id="my-video" muted autoplay></video>
                                 </MyVideoViewStyle>
                             </MyVideoAreaStyle>
                             <OpponentVideoAreaStyle>
                                 <OpponentVideoViewStyle>
-                                    <video id="to-video" poster='https://source.unsplash.com/random/800x600' alt={toPeerId} ></video>
+                                    <video id="to-video" poster='https://source.unsplash.com/random/800x600' alt={toPeerId} autoplay></video>
                                 </OpponentVideoViewStyle>
                                 <VideoControlAreaStyle>
                                     <ControlIcon className={ videoEnabled ? 'uil uil-video' : 'uil uil-video-slash'} enabled={videoEnabled} onClick={ event => this.toggleVideoEnabled(event) }></ControlIcon>

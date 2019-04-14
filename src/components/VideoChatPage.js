@@ -122,11 +122,14 @@ class VideoChatPage extends Component {
         event.preventDefault();
         this.setState({ isCopied: true });
 
-        var copytext = document.getElementById('room-id');
-        var range = document.createRange();
-        range.selectNode(copytext);
-        window.getSelection().addRange(range);
-        document.execCommand("copy");
+        const element = document.querySelector('#room-id');
+        const selection = window.getSelection();
+        const range = document.createRange();
+        range.selectNodeContents(element);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        console.log('選択された文字列: ', selection.toString());
+        const succeeded = document.execCommand('copy');
 
         setTimeout(
             function() {
@@ -301,13 +304,14 @@ class VideoChatPage extends Component {
                     <VideoAreaStyle>
                         <VideoAreaHeaderStyle>
                             <CopyLinkStyle>
-                                <input
+                                <div
                                     id="room-id"
                                     className="input"  
                                     type='text' 
                                     value={ window.location.href }
                                     >
-                                </input>
+                                    { window.location.href }
+                                </div>
                                 <Link 
                                     to={routes.VIDEO_CHAT + '/' + this._roomId} 
                                     className="button is-primary is-rounded"
@@ -408,7 +412,7 @@ const CopyLinkStyle = styled.div`
 	display: flex;
     align-items: center;
     color: #787979;
-    &>input {
+    &>div {
         width: 300px;
         margin: 5px;
         background-color: #FBFCFC;

@@ -46,6 +46,7 @@ const MessageMeBoxStyle = styled.div`
     margin-left: 1em;
     padding: 5px 10px;
     border-radius: 15px;
+    word-break: break-word;
 `
 
 const MessageBoxStyle = styled.div`
